@@ -46,6 +46,7 @@ public class AsteroidLogic : MonoBehaviour
     public void TakeHit() {
         life -= 1;
         if (life <= 0) {
+            Game_Manager.GM.updateScore(1.0f);
             GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
             GameObject effect = Instantiate(astExpl, transform.position, Quaternion.identity);
             effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);

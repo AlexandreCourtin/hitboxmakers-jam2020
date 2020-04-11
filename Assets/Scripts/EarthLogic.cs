@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EarthLogic : MonoBehaviour
 {
+    public GameObject earthExpl;
     public Rigidbody2D rb;
     public float speed = 10.0f;
     public int life = 5;
@@ -37,6 +38,10 @@ public class EarthLogic : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
@@ -57,6 +62,8 @@ public class EarthLogic : MonoBehaviour
                 this.gameObject.SetActive(false);
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 transform.Find("EarthSprite").gameObject.SetActive(false);
+                GameObject effect = Instantiate(earthExpl, transform.position, Quaternion.identity);
+                effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
             } else {
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
                 if (life < 2) GameObject.Find("Heart2").SetActive(false);

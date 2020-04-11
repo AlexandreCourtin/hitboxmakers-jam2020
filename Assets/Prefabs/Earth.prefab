@@ -217,6 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9487ebc21f23740d5a4a44a197063bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  earthExpl: {fileID: 5585543195090989642, guid: da29066295eff4bada906b41abe095ba,
+    type: 3}
   rb: {fileID: 0}
   speed: 4
   life: 5

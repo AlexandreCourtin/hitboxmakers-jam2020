@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class AsteroidLogic : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class AsteroidLogic : MonoBehaviour
     public float speed = 1f;
     [HideInInspector]
     public float rotSpeed = 1f;
+
+    public GameObject astExpl;
     public int life = 3;
 
     public Vector3 direction = Vector3.up;
@@ -16,6 +19,12 @@ public class AsteroidLogic : MonoBehaviour
     void FixedUpdate() {
         transform.position = transform.position + (direction.normalized * speed * Time.fixedDeltaTime);
         transform.Rotate(0f, 0f, rotSpeed, Space.Self);
+
+        if (GetComponentInChildren<Light2D>().intensity > 1) {
+            GetComponentInChildren<Light2D>().intensity -= Time.fixedDeltaTime * 50f;
+        } else if (GetComponentInChildren<Light2D>().intensity < 1) {
+            GetComponentInChildren<Light2D>().intensity = 1;
+        }
         CheckBounds();
     }
 
@@ -39,7 +48,12 @@ public class AsteroidLogic : MonoBehaviour
         if (life <= 0) {
             Game_Manager.GM.updateScore(1.0f);
             GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
+            GameObject effect = Instantiate(astExpl, transform.position, Quaternion.identity);
+            effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
             Destroy(this.gameObject);
+        } else {
+            GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
+            GetComponentInChildren<Light2D>().intensity = 10;
         }
     }
 }

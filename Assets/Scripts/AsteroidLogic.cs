@@ -37,6 +37,7 @@ public class AsteroidLogic : MonoBehaviour
     public void TakeHit() {
         life -= 1;
         if (life <= 0) {
+            GameManager.GM.updateScore(1.0f);
             Destroy(this.gameObject);
         }
     }

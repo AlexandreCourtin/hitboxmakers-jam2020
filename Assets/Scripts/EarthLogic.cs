@@ -49,11 +49,11 @@ public class EarthLogic : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "asteroid") {
             Destroy(other.gameObject);
-
+            
             life -= 1;
             if (life < 1) {
                 GameObject.Find("Heart1").SetActive(false);
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
             else if (life < 2) GameObject.Find("Heart2").SetActive(false);
             else if (life < 3) GameObject.Find("Heart3").SetActive(false);

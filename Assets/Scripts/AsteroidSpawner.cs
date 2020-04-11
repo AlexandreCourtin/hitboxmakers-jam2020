@@ -33,7 +33,7 @@ public class AsteroidSpawner : MonoBehaviour
         // RANDOM SCALE
         float xScale = Random.Range(1f, 1f + gameTimer * .05f);
         obj.transform.localScale = new Vector3(xScale, 1f, 1f);
-        obj.GetComponentInChildren<Light2D>().pointLightOuterRadius = xScale;
+        obj.GetComponentInChildren<Light2D>().pointLightOuterRadius = xScale * 1.5f;
         // obj.GetComponentInChildren<Light2D>().pointLightInnerRadius = xScale * .25f;
 
         // RANDOM SPEED

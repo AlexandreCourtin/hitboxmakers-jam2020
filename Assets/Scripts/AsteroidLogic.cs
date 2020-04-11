@@ -8,6 +8,7 @@ public class AsteroidLogic : MonoBehaviour
     public float speed = 1f;
     [HideInInspector]
     public float rotSpeed = 1f;
+    public int life = 3;
 
     public Vector3 direction = Vector3.up;
     public float boundLimit = 7f;
@@ -29,6 +30,13 @@ public class AsteroidLogic : MonoBehaviour
         if (transform.position.y > boundLimit) {
             Destroy(this.gameObject);
         } else if (transform.position.y < -boundLimit) {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void TakeHit() {
+        life -= 1;
+        if (life <= 0) {
             Destroy(this.gameObject);
         }
     }

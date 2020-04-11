@@ -39,4 +39,11 @@ public class Shot : MonoBehaviour
     {
         rb.MovePosition(new Vector2(transform.position.x, transform.position.y) + direction * speed * Time.fixedDeltaTime);
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "asteroid") {
+            other.gameObject.GetComponent<AsteroidLogic>().TakeHit();
+            Destroy(this.gameObject);
+        }
+    }
 }

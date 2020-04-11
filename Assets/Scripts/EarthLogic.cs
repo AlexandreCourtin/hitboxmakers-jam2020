@@ -6,11 +6,11 @@ public class EarthLogic : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed = 10.0f;
+    public int life = 5;
     private float x = 0;
     private float y = 0;
     Vector3 trans;
     Vector2 screenBounds;
-    int life = 5;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();

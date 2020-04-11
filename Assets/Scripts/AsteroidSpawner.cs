@@ -45,7 +45,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     IEnumerator BeginSpawn() {
         while(true) {
-            if (gameTimer > 2f) {
+            if (gameTimer > 2f && Game_Manager.GM.phase == 1) {
                 SpawnAsteroid(Random.Range(0, 200));
             }
             yield return new WaitForSeconds(1f - (gameTimer * .004f));

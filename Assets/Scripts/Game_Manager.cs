@@ -106,6 +106,12 @@ public class Game_Manager : MonoBehaviour
                 // TO DO Restart
             }
         }
+
+        // BEGIN BOSS FIGHT
+        if (score > 50 && phase == 1) {
+            phase = 2;
+            GameObject.Find("EndText").GetComponent<Animator>().SetBool("isEnd", true);
+        }
     }
 
     void AddSafe(Dictionary<string, int> dictionary, string key, int value)

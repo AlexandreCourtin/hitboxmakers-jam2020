@@ -23,7 +23,7 @@ public class EarthShoot : MonoBehaviour
                 proj.GetComponent<Shot>().earthRotation = transform.localRotation.eulerAngles;
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(0);
             }
-        } else if (Input.GetMouseButton(0) && Game_Manager.GM.isLose) {
+        } else if (Input.GetMouseButtonDown(0) && Game_Manager.GM.isLose) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

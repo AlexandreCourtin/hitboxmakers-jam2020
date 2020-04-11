@@ -63,6 +63,8 @@ public class EarthLogic : MonoBehaviour
                 transform.Find("EarthSprite").gameObject.SetActive(false);
                 GameObject effect = Instantiate(earthExpl, transform.position, Quaternion.identity);
                 effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
+                GetComponent<Collider2D>().enabled = false;
+                GameObject.Find("DeathMenu").GetComponent<Animator>().SetBool("isDead", true);
             } else {
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
                 if (life < 2) GameObject.Find("Heart2").SetActive(false);

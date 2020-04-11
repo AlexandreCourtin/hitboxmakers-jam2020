@@ -37,6 +37,7 @@ public class AsteroidLogic : MonoBehaviour
     public void TakeHit() {
         life -= 1;
         if (life <= 0) {
+            GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
             Destroy(this.gameObject);
         }
     }

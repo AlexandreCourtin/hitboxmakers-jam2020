@@ -18,24 +18,25 @@ public class EarthLogic : MonoBehaviour
     }
 
     void Update() {
-        // MOVE
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            x -= 1f;
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            x += 1f;
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            y += 1f;
-        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            y -= 1f;
-        trans = new Vector3(x, y, 0);
+        if (life > 0) {
+            // MOVE
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                x -= 1f;
+            if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                x += 1f;
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                y += 1f;
+            if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                y -= 1f;
+            trans = new Vector3(x, y, 0);
 
-        x = 0;
-        y = 0;
+            x = 0;
+            y = 0;
 
-        Vector3 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-
+            Vector3 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
     }
 
     void FixedUpdate()
@@ -53,12 +54,15 @@ public class EarthLogic : MonoBehaviour
             life -= 1;
             if (life < 1) {
                 GameObject.Find("Heart1").SetActive(false);
-                Destroy(this.gameObject);
+                GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
+                transform.Find("EarthSprite").gameObject.SetActive(false);
+            } else {
+                GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
+                if (life < 2) GameObject.Find("Heart2").SetActive(false);
+                else if (life < 3) GameObject.Find("Heart3").SetActive(false);
+                else if (life < 4) GameObject.Find("Heart4").SetActive(false);
+                else if (life < 5) GameObject.Find("Heart5").SetActive(false);
             }
-            else if (life < 2) GameObject.Find("Heart2").SetActive(false);
-            else if (life < 3) GameObject.Find("Heart3").SetActive(false);
-            else if (life < 4) GameObject.Find("Heart4").SetActive(false);
-            else if (life < 5) GameObject.Find("Heart5").SetActive(false);
         }
     }
 }

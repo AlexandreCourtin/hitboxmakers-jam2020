@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // to do animate background
-
     public Button Game;
     public Button Exit;
 

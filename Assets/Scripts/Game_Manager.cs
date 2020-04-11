@@ -19,10 +19,14 @@ public class Game_Manager : MonoBehaviour
     }
 
     public GameObject Player;
+    public GameObject PlayerName;
+    public GameObject PlayerScore;
     public bool isWin = false;
     public bool isLose = false;
+    public string playerName = "___";
     public int score = 0;
     public int phase = 1; // difficulte
+    public bool save = false;
 
     // SCORES
     public Dictionary<string, int> highscores;
@@ -49,7 +53,7 @@ public class Game_Manager : MonoBehaviour
     private bool checkTopTen()
     {
         orderScore();
-        if (highscores.Count > 0)
+        if (highscores.Count > 10)
         {
             if (highscores.ElementAt(highscores.Count - 1).Value < score)
                 return true;
@@ -78,30 +82,31 @@ public class Game_Manager : MonoBehaviour
 
     void Update()
     {
-        if (Player.transform.GetComponent<EarthLogic>().life <= 0)
+        if (Player.transform.GetComponent<EarthLogic>().life <= 0 && !save)
         {
             isLose = true;
             // check player prefs if top 10
             if (checkTopTen())
             {
-                // TO DO Get player name
-                AddSafe(highscores, "zouz", 10);
-                AddSafe(highscores, "adsadasd", 1000);
-
-                // Save highscores
-                string highscoresSerializedAgain = MySerialize(highscores);
-                // Order Score Desc
-                orderScore();
-                // Save player prefs !
-                PlayerPrefs.SetString("highscores", highscoresSerializedAgain);
-                PlayerPrefs.Save();
-
-                // TO DO Show highscores
+                // Open player panel
+                // Get player name
+                PlayerName.SetActive(true);
             } else
             {
-                // NO
-                // TO DO Restart
+                PlayerScore.SetActive(true);
             }
+        }
+        if (save)
+        {
+            AddSafe(highscores, playerName, score);
+            // Order Score Desc
+            orderScore();
+            // Save highscores
+            string highscoresSerializedAgain = MySerialize(highscores);
+            // Save player prefs !
+            PlayerPrefs.SetString("highscores", highscoresSerializedAgain);
+            PlayerPrefs.Save();
+            PlayerScore.SetActive(true);
         }
     }
 

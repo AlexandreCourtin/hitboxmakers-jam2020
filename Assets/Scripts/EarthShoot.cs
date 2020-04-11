@@ -12,13 +12,13 @@ public class EarthShoot : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
         // SHOOT
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && GetComponent<EarthLogic>().life > 0)
         {
             if ((Time.time - t) >= projectile[power].GetComponent<Shot>().freq)
             {
@@ -26,6 +26,7 @@ public class EarthShoot : MonoBehaviour
                 GameObject proj = Instantiate(projectile[power]);
                 proj.transform.position = transform.position;
                 proj.GetComponent<Shot>().earthRotation = transform.localRotation.eulerAngles;
+                GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(0);
             }
         }
     }

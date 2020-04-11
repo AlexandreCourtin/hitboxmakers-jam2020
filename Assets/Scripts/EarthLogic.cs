@@ -55,11 +55,10 @@ public class EarthLogic : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "asteroid") {
             Destroy(other.gameObject);
-            
+
             life -= 1;
             if (life < 1) {
                 GameObject.Find("Heart1").SetActive(false);
-                this.gameObject.SetActive(false);
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 transform.Find("EarthSprite").gameObject.SetActive(false);
                 GameObject effect = Instantiate(earthExpl, transform.position, Quaternion.identity);

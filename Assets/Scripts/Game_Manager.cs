@@ -8,7 +8,7 @@ using System;
 
 public class Game_Manager : MonoBehaviour
 {
-    
+
     public static Game_Manager GM;
     void Awake()
     {
@@ -64,11 +64,11 @@ public class Game_Manager : MonoBehaviour
     private void orderScore()
     {
         Dictionary<string, int> tmp = new Dictionary<string, int>();
-        
+
         var items = from pair in highscores
                     orderby pair.Value descending
                     select pair;
-                    
+
         foreach (KeyValuePair<string, int> pair in items)
         {
             tmp.Add(pair.Key, pair.Value);
@@ -135,5 +135,5 @@ public class Game_Manager : MonoBehaviour
         string slist = Convert.ToBase64String(mStream);
         return slist;
     }
-    
+
 }

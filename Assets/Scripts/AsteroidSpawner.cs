@@ -33,6 +33,7 @@ public class AsteroidSpawner : MonoBehaviour
         // RANDOM SCALE
         float xScale = Random.Range(1f, 1f + gameTimer * .03f);
         obj.transform.localScale = new Vector3(xScale, 1f, 1f);
+        obj.transform.Find("EarthSprite").transform.eulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
         obj.GetComponentInChildren<Light2D>().pointLightOuterRadius = xScale * 1.5f;
         // obj.GetComponentInChildren<Light2D>().pointLightInnerRadius = xScale * .25f;
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EarthLogic : MonoBehaviour
 {
+    public GameObject earthExpl;
     public Rigidbody2D rb;
     public float speed = 10.0f;
     public int life = 5;
@@ -56,6 +57,8 @@ public class EarthLogic : MonoBehaviour
                 GameObject.Find("Heart1").SetActive(false);
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 transform.Find("EarthSprite").gameObject.SetActive(false);
+                GameObject effect = Instantiate(earthExpl, transform.position, Quaternion.identity);
+                effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
             } else {
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
                 if (life < 2) GameObject.Find("Heart2").SetActive(false);

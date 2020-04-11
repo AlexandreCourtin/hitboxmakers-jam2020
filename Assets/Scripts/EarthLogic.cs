@@ -54,9 +54,7 @@ public class EarthLogic : MonoBehaviour
             life -= 1;
             if (life < 1) {
                 GameObject.Find("Heart1").SetActive(false);
-<<<<<<< HEAD
                 this.gameObject.SetActive(false);
-=======
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 transform.Find("EarthSprite").gameObject.SetActive(false);
             } else {
@@ -65,7 +63,6 @@ public class EarthLogic : MonoBehaviour
                 else if (life < 3) GameObject.Find("Heart3").SetActive(false);
                 else if (life < 4) GameObject.Find("Heart4").SetActive(false);
                 else if (life < 5) GameObject.Find("Heart5").SetActive(false);
->>>>>>> fec129828842f875ea32da9331ab0f41650ee01b
             }
         }
     }

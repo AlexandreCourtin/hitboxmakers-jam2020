@@ -15,7 +15,7 @@ public class Gui : MonoBehaviour
 
     void Update()
     {
-        Score.GetComponent<Text>().text = GameManager.GM.score.ToString();
+        Score.GetComponent<Text>().text = Game_Manager.GM.score.ToString();
         
     }
 }

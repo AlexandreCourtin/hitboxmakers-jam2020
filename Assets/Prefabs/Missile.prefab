@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   freq: 0.3
-  speed: 1.2
+  speed: 7
   shotLength: 0
   earthRotation: {x: 0, y: 0, z: 0}
   direction: {x: 0, y: 0}

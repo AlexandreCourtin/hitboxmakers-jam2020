@@ -31,13 +31,13 @@ public class AsteroidSpawner : MonoBehaviour
         obj.transform.eulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
 
         // RANDOM SCALE
-        float xScale = Random.Range(1f, 1f + gameTimer * .05f);
+        float xScale = Random.Range(1f, 1f + gameTimer * .03f);
         obj.transform.localScale = new Vector3(xScale, 1f, 1f);
         obj.GetComponentInChildren<Light2D>().pointLightOuterRadius = xScale * 1.5f;
         // obj.GetComponentInChildren<Light2D>().pointLightInnerRadius = xScale * .25f;
 
         // RANDOM SPEED
-        float speed = 2f + gameTimer * .1f;
+        float speed = 1f + gameTimer * .05f;
         obj.GetComponent<AsteroidLogic>().speed = speed;
         obj.GetComponent<AsteroidLogic>().rotSpeed = Random.Range(-speed * .25f, speed * .25f);
     }
@@ -47,7 +47,7 @@ public class AsteroidSpawner : MonoBehaviour
             if (gameTimer > 2f) {
                 SpawnAsteroid(Random.Range(0, 200));
             }
-            yield return new WaitForSeconds(1f - (gameTimer * .008f));
+            yield return new WaitForSeconds(1f - (gameTimer * .004f));
         }
     }
 }

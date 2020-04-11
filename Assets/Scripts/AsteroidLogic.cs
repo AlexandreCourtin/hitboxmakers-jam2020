@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class AsteroidLogic : MonoBehaviour
 {
-    public Vector3 direction = Vector3.up;
+    [HideInInspector]
     public float speed = 1f;
+    [HideInInspector]
     public float rotSpeed = 1f;
+
+    public Vector3 direction = Vector3.up;
     public float boundLimit = 7f;
 
     void FixedUpdate() {

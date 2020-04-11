@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -39,11 +40,13 @@ public class Game_Manager : MonoBehaviour
         {
             highscores = new Dictionary<string, int>();
         }
+        UpdateScoreText();
     }
 
     public void updateScore(float n)
     {
         score += (int)(n * 10);
+        UpdateScoreText();
     }
 
     private bool checkTopTen()
@@ -134,6 +137,10 @@ public class Game_Manager : MonoBehaviour
         byte[] mStream = memorystream.ToArray();
         string slist = Convert.ToBase64String(mStream);
         return slist;
+    }
+
+    void UpdateScoreText() {
+        GameObject.Find("ScoreText").GetComponent<Text>().text = "Score: " + score;
     }
 
 }

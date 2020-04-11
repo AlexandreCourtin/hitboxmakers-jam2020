@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 379101679179450653}
   m_Layer: 0
   m_Name: Asteroid
-  m_TagString: Untagged
+  m_TagString: asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,9 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550646bc3f23d4bcbbe935ac053a0a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0, z: 0}
   speed: 2
   rotSpeed: 1
+  direction: {x: 1, y: 0, z: 0}
   boundLimit: 10
 --- !u!61 &379101679179450653
 BoxCollider2D:

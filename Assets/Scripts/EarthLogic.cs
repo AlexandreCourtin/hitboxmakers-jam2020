@@ -10,6 +10,7 @@ public class EarthLogic : MonoBehaviour
     private float y = 0;
     Vector3 trans;
     Vector2 screenBounds;
+    int life = 5;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -43,5 +44,21 @@ public class EarthLogic : MonoBehaviour
         float mvtY = Mathf.Clamp(transform.position.y - trans.y * speed * Time.fixedDeltaTime, - screenBounds.y, screenBounds.y);
         Vector3 tmp = new Vector3(mvtX, mvtY, 0);
         rb.MovePosition(tmp);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "asteroid") {
+            Destroy(other.gameObject);
+
+            life -= 1;
+            if (life < 1) {
+                GameObject.Find("Heart1").SetActive(false);
+                Destroy(this.gameObject);
+            }
+            else if (life < 2) GameObject.Find("Heart2").SetActive(false);
+            else if (life < 3) GameObject.Find("Heart3").SetActive(false);
+            else if (life < 4) GameObject.Find("Heart4").SetActive(false);
+            else if (life < 5) GameObject.Find("Heart5").SetActive(false);
+        }
     }
 }

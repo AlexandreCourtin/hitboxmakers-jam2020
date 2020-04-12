@@ -46,8 +46,14 @@ public class EarthLogic : MonoBehaviour
 
     void FixedUpdate()
     {
-        float mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, screenBounds.x);
+        float mvtX;
         float mvtY = Mathf.Clamp(transform.position.y - trans.y * speed * Time.fixedDeltaTime, - screenBounds.y, screenBounds.y);
+
+        if (Game_Manager.GM.phase == 1) {
+            mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, screenBounds.x);
+        } else {
+            mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, 0f);
+        }
         Vector3 tmp = new Vector3(mvtX, mvtY, 0);
         rb.MovePosition(tmp);
     }

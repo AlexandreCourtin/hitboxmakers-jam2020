@@ -20,10 +20,10 @@ public class AsteroidLogic : MonoBehaviour
         transform.position = transform.position + (direction.normalized * speed * Time.fixedDeltaTime);
         transform.Rotate(0f, 0f, rotSpeed, Space.Self);
 
-        if (GetComponentInChildren<Light2D>().intensity > 1) {
+        if (GetComponentInChildren<Light2D>().intensity > 2) {
             GetComponentInChildren<Light2D>().intensity -= Time.fixedDeltaTime * 50f;
-        } else if (GetComponentInChildren<Light2D>().intensity < 1) {
-            GetComponentInChildren<Light2D>().intensity = 1;
+        } else if (GetComponentInChildren<Light2D>().intensity < 2) {
+            GetComponentInChildren<Light2D>().intensity = 2;
         }
         CheckBounds();
     }

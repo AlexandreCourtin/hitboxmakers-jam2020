@@ -8,6 +8,7 @@ public class AsteroidSpawner : MonoBehaviour
     public int angleDispertion = 50;
     public float gameTimer;
     public GameObject asteroidObj;
+    public GameObject darkroidObj;
 
     float radius = 9f;
 
@@ -21,9 +22,11 @@ public class AsteroidSpawner : MonoBehaviour
         if (gameTimer < 120f && (Game_Manager.GM.phase == 1 || Game_Manager.GM.phase == 3)) gameTimer += Time.fixedDeltaTime;
     }
 
-    void SpawnAsteroid(int angle) {
+    void SpawnAsteroid(int angle, int type) {
         Vector3 pos = new Vector3(radius * Mathf.Sin(angle * 1.8f * Mathf.Deg2Rad), radius * Mathf.Cos(angle * 1.8f * Mathf.Deg2Rad), 0f);
-        GameObject obj = Instantiate(asteroidObj, pos, Quaternion.identity);
+        GameObject obj;
+        if (type == 0) obj = Instantiate(asteroidObj, pos, Quaternion.identity);
+        else obj = Instantiate(darkroidObj, pos, Quaternion.identity);
 
         // RANDOM ANGLE
         obj.transform.eulerAngles = new Vector3(0f, 0f, -(angle + Random.Range(-angleDispertion, angleDispertion)) * 1.8f);
@@ -46,11 +49,11 @@ public class AsteroidSpawner : MonoBehaviour
     IEnumerator BeginSpawn() {
         while(true) {
             if (gameTimer > 2f && Game_Manager.GM.phase == 1) {
-                SpawnAsteroid(Random.Range(0, 200));
+                SpawnAsteroid(Random.Range(0, 200), 0);
             } else if (Game_Manager.GM.phase == 2) {
                 gameTimer = 0f;
             } else if (gameTimer > 2f && Game_Manager.GM.phase == 3) {
-                SpawnAsteroid(Random.Range(0, 200));
+                SpawnAsteroid(Random.Range(0, 200), 1);
             }
             yield return new WaitForSeconds(1f - (gameTimer * .004f));
         }

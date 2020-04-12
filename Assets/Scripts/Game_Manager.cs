@@ -21,6 +21,7 @@ public class Game_Manager : MonoBehaviour
     public GameObject Player;
     public GameObject PlayerName;
     public GameObject PlayerScore;
+    public bool showEnd = false;
     public bool isWin = false;
     public bool isLose = false;
     public string playerName = "___";
@@ -84,7 +85,7 @@ public class Game_Manager : MonoBehaviour
 
     void Update()
     {
-        if (Player.transform.GetComponent<EarthLogic>().life <= 0 && !save)
+        if (showEnd && !save)
         {
             isLose = true;
             // check player prefs if top 10

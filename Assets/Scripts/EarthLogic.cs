@@ -71,6 +71,8 @@ public class EarthLogic : MonoBehaviour
                 effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
                 GetComponent<Collider2D>().enabled = false;
                 GameObject.Find("DeathMenu").GetComponent<Animator>().SetBool("isDead", true);
+                GameObject.Find("FinalBoss").GetComponent<Animator>().enabled = false;
+                GameObject.Find("EndText").SetActive(false);
             } else {
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
                 if (life < 2) GameObject.Find("Heart2").SetActive(false);

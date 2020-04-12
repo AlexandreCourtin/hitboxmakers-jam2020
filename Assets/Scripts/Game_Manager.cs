@@ -8,7 +8,7 @@ using System;
 
 public class Game_Manager : MonoBehaviour
 {
-    
+    // petit singleton
     public static Game_Manager GM;
     void Awake()
     {

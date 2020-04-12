@@ -14,14 +14,11 @@ public class EarthShoot : MonoBehaviour
 
     void Update()
     {
-        if (Game_Manager.GM.score > 30)
-            shotFreq = 0.2f;
-        if (Game_Manager.GM.score > 50)
+        if (Game_Manager.GM.score > 200)
             shotFreq = 0.1f;
-        if (Game_Manager.GM.score > 90)
-            shotFreq = 0.05f;
-        if (Game_Manager.GM.score > 150)
-            shotFreq = 0.02f;
+        else if (Game_Manager.GM.score > 100)
+            shotFreq = 0.2f;
+
         // SHOOT
         int life = GetComponent<EarthLogic>().life;
         if (Input.GetMouseButtonDown(0) && Game_Manager.GM.isWin && !Game_Manager.GM.showEnd) {
@@ -33,7 +30,6 @@ public class EarthShoot : MonoBehaviour
                 t = Time.time;
                 GameObject proj = Instantiate(projectile[power]);
                 proj.transform.position = transform.position;
-                // projectile[power].GetComponent<Shot>().freq;
                 proj.GetComponent<Shot>().earthRotation = transform.localRotation.eulerAngles;
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(0);
             }

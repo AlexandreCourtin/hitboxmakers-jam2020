@@ -52,10 +52,10 @@ public class AsteroidSpawner : MonoBehaviour
                 SpawnAsteroid(Random.Range(0, 200), 0);
             } else if (Game_Manager.GM.phase == 2) {
                 gameTimer = 0f;
-            } else if (gameTimer > 2f && Game_Manager.GM.phase == 3) {
+            } else if (Game_Manager.GM.phase == 3) {
                 SpawnAsteroid(Random.Range(0, 200), 1);
             }
-            yield return new WaitForSeconds(1f - (gameTimer * .004f));
+            yield return new WaitForSeconds(.4f);
         }
     }
 }

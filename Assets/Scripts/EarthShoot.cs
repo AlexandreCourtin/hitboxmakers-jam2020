@@ -17,17 +17,17 @@ public class EarthShoot : MonoBehaviour
         if (Game_Manager.GM.score > 30)
             shotFreq = 0.2f;
         if (Game_Manager.GM.score > 100)
-            shotFreq = 0.15f;
+            shotFreq = 0.17f;
         if (Game_Manager.GM.score > 250)
-            shotFreq = 0.09f;
+            shotFreq = 0.15f;
         if (Game_Manager.GM.score > 450)
-            shotFreq = 0.08f;
+            shotFreq = 0.12f;
         if (Game_Manager.GM.score > 750)
-            shotFreq = 0.06f;
+            shotFreq = 0.10f;
         if (Game_Manager.GM.score > 1000)
-            shotFreq = 0.04f;
+            shotFreq = 0.09f;
         if (Game_Manager.GM.score > 2000)
-            shotFreq = 0.02f;
+            shotFreq = 0.08f;
 
         // SHOOT
         int life = GetComponent<EarthLogic>().life;

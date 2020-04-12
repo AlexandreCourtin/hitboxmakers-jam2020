@@ -23,6 +23,7 @@ public class CameraShake : MonoBehaviour
 
     public void shakeCamera() {
         shake = true;
+        GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(3);
     }
 
     public void phaseThree() {

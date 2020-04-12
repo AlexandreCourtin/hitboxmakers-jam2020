@@ -15,7 +15,10 @@ public class EarthShoot : MonoBehaviour
     {
         // SHOOT
         int life = GetComponent<EarthLogic>().life;
-        if (Input.GetMouseButton(0) && life > 0) {
+        if (Input.GetMouseButtonDown(0) && Game_Manager.GM.isWin && !Game_Manager.GM.showEnd) {
+            UpdateUiForLeaderboard();
+        }
+        else if (Input.GetMouseButton(0) && life > 0 && !Game_Manager.GM.showEnd) {
             if ((Time.time - t) >= projectile[power].GetComponent<Shot>().freq)
             {
                 t = Time.time;
@@ -25,9 +28,12 @@ public class EarthShoot : MonoBehaviour
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(0);
             }
         } else if (Input.GetMouseButtonDown(0) && life <= 0 && !Game_Manager.GM.showEnd) {
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Game_Manager.GM.showEnd = true;
-            GameObject.Find("DeathMenu").SetActive(false);
+            UpdateUiForLeaderboard();
         }
+    }
+
+    void UpdateUiForLeaderboard() {
+        Game_Manager.GM.showEnd = true;
+        GameObject.Find("DeathMenu").SetActive(false);
     }
 }

@@ -154,4 +154,10 @@ public class Game_Manager : MonoBehaviour
         GameObject.Find("ScoreText").GetComponent<Text>().text = "Score: " + score;
     }
 
+    public void destroyAllAsteroids() {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("asteroid");
+
+     for(int i = 0 ; i < gameObjects.Length ; i++)
+         Destroy(gameObjects[i]);
+    }
 }

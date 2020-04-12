@@ -18,6 +18,7 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+    public Texture2D cursor;
     public GameObject Player;
     public GameObject PlayerName;
     public GameObject PlayerScore;
@@ -36,7 +37,8 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        Cursor.lockState = CursorLockMode.Confined;
         // Load highscores
         string highscoresSerialized = PlayerPrefs.GetString("highscores", "");
         if (!String.IsNullOrEmpty(highscoresSerialized))
@@ -117,7 +119,7 @@ public class Game_Manager : MonoBehaviour
         }
 
         // BEGIN BOSS FIGHT
-        if (score > 300 && phase == 1) {
+        if (score > 100 && phase == 1) {
             phase = 2;
             GameObject.Find("EndText").GetComponent<Animator>().SetBool("isEnd", true);
         }

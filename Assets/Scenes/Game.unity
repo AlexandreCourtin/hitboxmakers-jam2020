@@ -1047,7 +1047,7 @@ MonoBehaviour:
   Player: {fileID: 260737153}
   isWin: 0
   isLose: 0
-  score: 60
+  score: 0
   phase: 1
 --- !u!1 &730745366
 GameObject:

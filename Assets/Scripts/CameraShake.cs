@@ -18,11 +18,14 @@ public class CameraShake : MonoBehaviour
             cam.transform.position = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), -10f);
         } else if (shake) {
             cam.transform.position = new Vector3(0f, 0f, -10f);
-            Destroy(this);
         }
     }
 
     public void shakeCamera() {
         shake = true;
+    }
+
+    public void phaseThree() {
+        Game_Manager.GM.phase = 3;
     }
 }

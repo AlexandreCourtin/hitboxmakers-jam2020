@@ -18,7 +18,7 @@ public class AsteroidSpawner : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (gameTimer < 120f) gameTimer += Time.fixedDeltaTime;
+        if (gameTimer < 120f && (Game_Manager.GM.phase == 1 || Game_Manager.GM.phase == 3)) gameTimer += Time.fixedDeltaTime;
     }
 
     void SpawnAsteroid(int angle) {
@@ -46,6 +46,10 @@ public class AsteroidSpawner : MonoBehaviour
     IEnumerator BeginSpawn() {
         while(true) {
             if (gameTimer > 2f && Game_Manager.GM.phase == 1) {
+                SpawnAsteroid(Random.Range(0, 200));
+            } else if (Game_Manager.GM.phase == 2) {
+                gameTimer = 0f;
+            } else if (gameTimer > 2f && Game_Manager.GM.phase == 3) {
                 SpawnAsteroid(Random.Range(0, 200));
             }
             yield return new WaitForSeconds(1f - (gameTimer * .004f));

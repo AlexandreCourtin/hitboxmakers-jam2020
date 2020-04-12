@@ -7,15 +7,14 @@ using System.Linq;
 
 public class Restart : MonoBehaviour
 {
-    public Button StartButton;
+   // public Button StartButton;
     public GameObject UL;
     public GameObject li;
 
     void Start()
     {
-        StartButton.onClick.AddListener(LaunchGame);
-
-        // Display LB
+   //     StartButton.GetComponent<Button>().onClick.AddListener(LaunchGame);
+           // Display LB
         for (int i = 0; i < 10; i++)
         {
             if (i < Game_Manager.GM.highscores.Count)
@@ -43,6 +42,9 @@ public class Restart : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            LaunchGame();
+        }
     }
 }

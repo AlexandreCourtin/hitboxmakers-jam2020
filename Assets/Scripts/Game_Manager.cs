@@ -32,6 +32,8 @@ public class Game_Manager : MonoBehaviour
     // SCORES
     public Dictionary<string, int> highscores;
 
+    bool saved = false;
+
     void Start()
     {
         // Load highscores
@@ -99,7 +101,7 @@ public class Game_Manager : MonoBehaviour
                 PlayerScore.SetActive(true);
             }
         }
-        if (save)
+        else if (save && !saved)
         {
             AddSafe(highscores, playerName, score);
             // Order Score Desc
@@ -110,6 +112,7 @@ public class Game_Manager : MonoBehaviour
             PlayerPrefs.SetString("highscores", highscoresSerializedAgain);
             PlayerPrefs.Save();
             PlayerScore.SetActive(true);
+            saved = true;
         }
 
         // BEGIN BOSS FIGHT
@@ -123,8 +126,9 @@ public class Game_Manager : MonoBehaviour
     {
         if (dictionary.ContainsKey(key))
         {
-            if (dictionary[key] != value)
-                dictionary.Add(key, value);
+            if (dictionary[key] < value) {
+                dictionary[key] = value;
+            }
         } else
         {
             dictionary.Add(key, value);

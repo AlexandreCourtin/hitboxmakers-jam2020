@@ -40,7 +40,6 @@ public class EarthShoot : MonoBehaviour
                 t = Time.time;
                 GameObject proj = Instantiate(projectile[power]);
                 proj.transform.position = transform.position;
-                // projectile[power].GetComponent<Shot>().freq;
                 proj.GetComponent<Shot>().earthRotation = transform.localRotation.eulerAngles;
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(0);
             }

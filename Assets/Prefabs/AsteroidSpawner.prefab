@@ -47,3 +47,5 @@ MonoBehaviour:
   gameTimer: 0
   asteroidObj: {fileID: 5307171683179997456, guid: eac2a8ac5868f4e89908f9414071a7c9,
     type: 3}
+  darkroidObj: {fileID: 7504713697527879237, guid: d16757fbcb20b4525832e860bcc757bc,
+    type: 3}

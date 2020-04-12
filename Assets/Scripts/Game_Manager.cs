@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,7 +9,6 @@ using System;
 
 public class Game_Manager : MonoBehaviour
 {
-    // petit singleton
     public static Game_Manager GM;
     void Awake()
     {
@@ -43,11 +43,13 @@ public class Game_Manager : MonoBehaviour
         {
             highscores = new Dictionary<string, int>();
         }
+        UpdateScoreText();
     }
 
     public void updateScore(float n)
     {
         score += (int)(n * 10);
+        UpdateScoreText();
     }
 
     private bool checkTopTen()
@@ -68,11 +70,11 @@ public class Game_Manager : MonoBehaviour
     private void orderScore()
     {
         Dictionary<string, int> tmp = new Dictionary<string, int>();
-        
+
         var items = from pair in highscores
                     orderby pair.Value descending
                     select pair;
-                    
+
         foreach (KeyValuePair<string, int> pair in items)
         {
             tmp.Add(pair.Key, pair.Value);
@@ -108,6 +110,12 @@ public class Game_Manager : MonoBehaviour
             PlayerPrefs.Save();
             PlayerScore.SetActive(true);
         }
+
+        // BEGIN BOSS FIGHT
+        if (score > 50 && phase == 1) {
+            phase = 2;
+            GameObject.Find("EndText").GetComponent<Animator>().SetBool("isEnd", true);
+        }
     }
 
     void AddSafe(Dictionary<string, int> dictionary, string key, int value)
@@ -140,5 +148,9 @@ public class Game_Manager : MonoBehaviour
         string slist = Convert.ToBase64String(mStream);
         return slist;
     }
-    
+
+    void UpdateScoreText() {
+        GameObject.Find("ScoreText").GetComponent<Text>().text = "Score: " + score;
+    }
+
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EarthLogic : MonoBehaviour
 {
+    public GameObject earthExpl;
     public Rigidbody2D rb;
     public float speed = 10.0f;
     public int life = 5;
@@ -37,12 +38,22 @@ public class EarthLogic : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
     }
 
     void FixedUpdate()
     {
-        float mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, screenBounds.x);
+        float mvtX;
         float mvtY = Mathf.Clamp(transform.position.y - trans.y * speed * Time.fixedDeltaTime, - screenBounds.y, screenBounds.y);
+
+        if (Game_Manager.GM.phase == 1) {
+            mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, screenBounds.x);
+        } else {
+            mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, 0f);
+        }
         Vector3 tmp = new Vector3(mvtX, mvtY, 0);
         rb.MovePosition(tmp);
     }
@@ -50,13 +61,16 @@ public class EarthLogic : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "asteroid") {
             Destroy(other.gameObject);
-            
+
             life -= 1;
             if (life < 1) {
                 GameObject.Find("Heart1").SetActive(false);
-                this.gameObject.SetActive(false);
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 transform.Find("EarthSprite").gameObject.SetActive(false);
+                GameObject effect = Instantiate(earthExpl, transform.position, Quaternion.identity);
+                effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
+                GetComponent<Collider2D>().enabled = false;
+                GameObject.Find("DeathMenu").GetComponent<Animator>().SetBool("isDead", true);
             } else {
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
                 if (life < 2) GameObject.Find("Heart2").SetActive(false);

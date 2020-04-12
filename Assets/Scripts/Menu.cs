@@ -16,18 +16,16 @@ public class Menu : MonoBehaviour
         onGame.onClick.AddListener(LaunchGame);
         onExit.onClick.AddListener(LaunchExit);
     }
+
     void LaunchGame()
     {
         Debug.Log("LAUNCH GAME");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
     void LaunchExit()
     {
         Debug.Log("EXIT");
         Application.Quit();
-    }
-    void Update()
-    {
-        
     }
 }

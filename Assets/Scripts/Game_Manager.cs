@@ -155,7 +155,7 @@ public class Game_Manager : MonoBehaviour
     }
 
     void UpdateScoreText() {
-        GameObject.Find("ScoreText").GetComponent<Text>().text = "Score: " + score;
+        GameObject.Find("ScoreText").GetComponent<Text>().text = score.ToString();
     }
 
     public void destroyAllAsteroids() {

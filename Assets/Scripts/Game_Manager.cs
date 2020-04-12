@@ -36,6 +36,7 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         // Load highscores
         string highscoresSerialized = PlayerPrefs.GetString("highscores", "");
         if (!String.IsNullOrEmpty(highscoresSerialized))

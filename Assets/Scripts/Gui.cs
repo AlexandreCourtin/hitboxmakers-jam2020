@@ -8,14 +8,8 @@ public class Gui : MonoBehaviour
     public Text Score;
     public GameObject MenuScore;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         Score.GetComponent<Text>().text = Game_Manager.GM.score.ToString();
-        
     }
 }

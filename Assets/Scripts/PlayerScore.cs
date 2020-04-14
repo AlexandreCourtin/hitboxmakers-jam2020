@@ -6,14 +6,8 @@ using System.Text.RegularExpressions;
 
 public class PlayerScore : MonoBehaviour
 {
-    Regex r = new Regex("^([-+]?)?[0-9]+(,[0-9]+)?$");
-
     public Text[] PN;
     private int let = 0;
-
-    void Start()
-    {
-    }
 
     void resetPanel ()
     {

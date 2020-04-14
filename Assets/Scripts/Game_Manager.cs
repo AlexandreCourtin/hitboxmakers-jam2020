@@ -27,7 +27,7 @@ public class Game_Manager : MonoBehaviour
     public bool isLose = false;
     public string playerName = "___";
     public int score = 0;
-    public int phase = 1; // difficulte
+    public int phase = 1;
     public bool save = false;
 
     // SCORES
@@ -39,6 +39,7 @@ public class Game_Manager : MonoBehaviour
     {
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         Cursor.lockState = CursorLockMode.Confined;
+
         // Load highscores
         string highscoresSerialized = PlayerPrefs.GetString("highscores", "");
         if (!String.IsNullOrEmpty(highscoresSerialized))

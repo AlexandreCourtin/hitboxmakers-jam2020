@@ -38,7 +38,6 @@ public class AsteroidSpawner : MonoBehaviour
         obj.transform.localScale = new Vector3(xScale, 1f, 1f);
         obj.transform.Find("EarthSprite").transform.eulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
         obj.GetComponentInChildren<Light2D>().pointLightOuterRadius = xScale * 1.5f;
-        // obj.GetComponentInChildren<Light2D>().pointLightInnerRadius = xScale * .25f;
 
         // RANDOM SPEED
         float speed = 1f + gameTimer * .05f;
@@ -48,14 +47,14 @@ public class AsteroidSpawner : MonoBehaviour
 
     IEnumerator BeginSpawn() {
         while(true) {
-            if (gameTimer > 2f && Game_Manager.GM.phase == 1) {
+            if (gameTimer > 2f && Game_Manager.GM.phase == 1) { // FIRST PHASE - NORMAL ASTEROIDS
                 SpawnAsteroid(Random.Range(0, 200), 0);
-            } else if (Game_Manager.GM.phase == 2) {
+            } else if (Game_Manager.GM.phase == 2) { // BOSS INTRO - RESET DIFFICULTY TIMER
                 gameTimer = 0f;
-            } else if (Game_Manager.GM.phase == 3) {
+            } else if (Game_Manager.GM.phase == 3) { // BOSS PHASE - DARK ASTEROIDS
                 SpawnAsteroid(Random.Range(0, 200), 1);
             }
-            yield return new WaitForSeconds(.4f);
+            yield return new WaitForSeconds(2f - (Game_Manager.GM.phase * .5f));
         }
     }
 }

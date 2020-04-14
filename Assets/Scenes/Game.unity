@@ -7913,8 +7913,8 @@ GameObject:
   - component: {fileID: 1989143818}
   - component: {fileID: 1989143817}
   - component: {fileID: 1989143819}
-  - component: {fileID: 1989143816}
   - component: {fileID: 1989143820}
+  - component: {fileID: 1989143816}
   m_Layer: 0
   m_Name: Sounds
   m_TagString: Untagged
@@ -7964,7 +7964,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 180cb141c7dd6467e8a3a27d780d96fa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8060,7 +8060,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b8db6b6a34184d44a8af5cac920022f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8156,7 +8156,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 297997876cd324150a2ca258cd735b92, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8252,7 +8252,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8a3d534238eed4d748346a645b58d1f5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0

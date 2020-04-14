@@ -23,10 +23,12 @@ public class AsteroidLogic : MonoBehaviour
         if (!isGoingForBoss) {
             transform.position = transform.position + (direction.normalized * speed * Time.fixedDeltaTime);
         } else {
+            // GO TO BOSS DIRECTION
             float t = Time.fixedDeltaTime * 10f;
             Vector3 pos = GameObject.Find("FinalBossMark").transform.position;
             transform.position = Vector3.MoveTowards(transform.position, pos, t);
 
+            // HIT BOSS IF NEAR IT
             if (Vector3.Distance(transform.position, pos) < 1f) {
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 GameObject.Find("FinalBoss").GetComponent<BossFight>().isHit();
@@ -35,11 +37,14 @@ public class AsteroidLogic : MonoBehaviour
         }
         transform.Rotate(0f, 0f, rotSpeed, Space.Self);
 
+        // HIT VISUAL FEEDBACK - ASTEROID WILL LIGHT UP IF HIT
         if (GetComponentInChildren<Light2D>().intensity > 2) {
             GetComponentInChildren<Light2D>().intensity -= Time.fixedDeltaTime * 50f;
         } else if (GetComponentInChildren<Light2D>().intensity < 2) {
             GetComponentInChildren<Light2D>().intensity = 2;
         }
+
+        // DESTROY ASTEROID IF OUT OF SCREEN
         CheckBounds();
     }
 
@@ -60,21 +65,22 @@ public class AsteroidLogic : MonoBehaviour
 
     public void TakeHit() {
         life -= 1;
-        if (life <= 0) {
-            if (!isDarkroid) {
+
+        if (life <= 0) { // IF NO LIFE
+            if (!isDarkroid) { // NORMAL ASTEROID - SPAWN VFX DESTRUCTION
                 Game_Manager.GM.updateScore(1.0f);
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 GameObject effect = Instantiate(astExpl, transform.position, Quaternion.identity);
                 effect.transform.eulerAngles = new Vector3(-90f, 0f, 0f);
                 Destroy(this.gameObject);
-            } else if (!isGoingForBoss) {
+            } else if (!isGoingForBoss) { // DARK ASTEROID - GO FOR BOSS
                 Game_Manager.GM.updateScore(1.5f);
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
                 GetComponentInChildren<ParticleSystem>().Play();
                 GetComponentInChildren<Renderer>().enabled = false;
                 isGoingForBoss = true;
             }
-        } else {
+        } else { // NORMAL HIT
             GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
             GetComponentInChildren<Light2D>().intensity = 10;
         }

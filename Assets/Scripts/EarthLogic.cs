@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EarthLogic : MonoBehaviour
 {
@@ -8,9 +9,7 @@ public class EarthLogic : MonoBehaviour
     public Rigidbody2D rb;
     public float speed = 10.0f;
     public int life = 5;
-    private float x = 0;
-    private float y = 0;
-    Vector3 trans;
+    Vector3 movements;
     Vector2 screenBounds;
 
     void Start() {
@@ -20,19 +19,16 @@ public class EarthLogic : MonoBehaviour
 
     void Update() {
         if (life > 0) {
-            // MOVE
+            // MOVEMENTS
+            movements = Vector3.zero;
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                x -= 1f;
+                movements.x -= 1f;
             if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                x += 1f;
+                movements.x += 1f;
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-                y += 1f;
+                movements.y += 1f;
             if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-                y -= 1f;
-            trans = new Vector3(x, y, 0);
-
-            x = 0;
-            y = 0;
+                movements.y -= 1f;
 
             Vector3 direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -47,24 +43,23 @@ public class EarthLogic : MonoBehaviour
     void FixedUpdate()
     {
         float mvtX;
-        float mvtY = Mathf.Clamp(transform.position.y - trans.y * speed * Time.fixedDeltaTime, - screenBounds.y, screenBounds.y);
+        float mvtY = Mathf.Clamp(transform.position.y - movements.y * speed * Time.fixedDeltaTime, - screenBounds.y, screenBounds.y);
 
         if (Game_Manager.GM.phase == 1) {
-            mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, screenBounds.x);
+            mvtX = Mathf.Clamp(transform.position.x - movements.x * speed * Time.fixedDeltaTime, - screenBounds.x, screenBounds.x);
         } else {
-            mvtX = Mathf.Clamp(transform.position.x - trans.x * speed * Time.fixedDeltaTime, - screenBounds.x, 0f);
+            mvtX = Mathf.Clamp(transform.position.x - movements.x * speed * Time.fixedDeltaTime, - screenBounds.x, 0f);
         }
         Vector3 tmp = new Vector3(mvtX, mvtY, 0);
         rb.MovePosition(tmp);
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag == "asteroid") {
+        if (other.gameObject.tag == "asteroid") { // IF EARTH TOUCH ASTEROID
             Destroy(other.gameObject);
 
             life -= 1;
-            if (life < 1) {
-                GameObject.Find("Heart1").SetActive(false);
+            if (life < 1) { // FATAL HIT
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(1);
                 transform.Find("EarthSprite").gameObject.SetActive(false);
                 GameObject effect = Instantiate(earthExpl, transform.position, Quaternion.identity);
@@ -73,13 +68,19 @@ public class EarthLogic : MonoBehaviour
                 GameObject.Find("DeathMenu").GetComponent<Animator>().SetBool("isDead", true);
                 GameObject.Find("FinalBoss").GetComponent<Animator>().enabled = false;
                 GameObject.Find("EndText").SetActive(false);
-            } else {
+                UpdateLifeBar();
+            } else { // NORMAL HIT
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
-                if (life < 2) GameObject.Find("Heart2").SetActive(false);
-                else if (life < 3) GameObject.Find("Heart3").SetActive(false);
-                else if (life < 4) GameObject.Find("Heart4").SetActive(false);
-                else if (life < 5) GameObject.Find("Heart5").SetActive(false);
+                UpdateLifeBar();
             }
         }
+    }
+
+    void UpdateLifeBar() {
+        GameObject.Find("Heart1").GetComponent<Image>().enabled = !(life < 1);
+        GameObject.Find("Heart2").GetComponent<Image>().enabled = !(life < 2);
+        GameObject.Find("Heart3").GetComponent<Image>().enabled = !(life < 3);
+        GameObject.Find("Heart4").GetComponent<Image>().enabled = !(life < 4);
+        GameObject.Find("Heart5").GetComponent<Image>().enabled = !(life < 5);
     }
 }

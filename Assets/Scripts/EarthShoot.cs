@@ -7,8 +7,7 @@ public class EarthShoot : MonoBehaviour
 {
     private float t;
 
-    // projectile type
-    public int power = 0; // num dans projectile []
+    public int power = 0;
     public float shotFreq = 0.3f;
     public GameObject[] projectile;
 
@@ -29,12 +28,14 @@ public class EarthShoot : MonoBehaviour
         if (Game_Manager.GM.score > 2000)
             shotFreq = 0.08f;
 
-        // SHOOT
+        // LEFT CLICK
         int life = GetComponent<EarthLogic>().life;
-        if (Input.GetMouseButtonDown(0) && Game_Manager.GM.isWin && !Game_Manager.GM.showEnd) {
+        if (Input.GetMouseButtonDown(0) && !Game_Manager.GM.showEnd && (Game_Manager.GM.isWin || life <= 0)) {
+            // SHOW LEADERBOARD AFTER GAMEOVER
             UpdateUiForLeaderboard();
         }
         else if (Input.GetMouseButton(0) && life > 0 && !Game_Manager.GM.showEnd) {
+            // SHOOT
             if ((Time.time - t) >= shotFreq)
             {
                 t = Time.time;
@@ -43,8 +44,6 @@ public class EarthShoot : MonoBehaviour
                 proj.GetComponent<Shot>().earthRotation = transform.localRotation.eulerAngles;
                 GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(0);
             }
-        } else if (Input.GetMouseButtonDown(0) && life <= 0 && !Game_Manager.GM.showEnd) {
-            UpdateUiForLeaderboard();
         }
     }
 

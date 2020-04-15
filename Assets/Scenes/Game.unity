@@ -1376,7 +1376,7 @@ MonoBehaviour:
   isWin: 0
   isLose: 0
   playerName: ___
-  score: 0
+  score: 500
   phase: 1
   save: 0
 --- !u!1 &730745366

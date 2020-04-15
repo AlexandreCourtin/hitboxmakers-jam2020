@@ -28,5 +28,6 @@ public class CameraShake : MonoBehaviour
 
     public void phaseThree() {
         Game_Manager.GM.phase = 3;
+        Game_Manager.GM.asteroidSpawnTimer = .5f;
     }
 }

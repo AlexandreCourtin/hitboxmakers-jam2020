@@ -25,6 +25,7 @@ public class Game_Manager : MonoBehaviour
     public bool showEnd = false;
     public bool isWin = false;
     public bool isLose = false;
+    public float asteroidSpawnTimer = .6f;
     public string playerName = "___";
     public int score = 0;
     public int phase = 1;

@@ -54,7 +54,7 @@ public class AsteroidSpawner : MonoBehaviour
             } else if (Game_Manager.GM.phase == 3) { // BOSS PHASE - DARK ASTEROIDS
                 SpawnAsteroid(Random.Range(0, 200), 1);
             }
-            yield return new WaitForSeconds(2f - (Game_Manager.GM.phase * .5f));
+            yield return new WaitForSeconds(Game_Manager.GM.asteroidSpawnTimer);
         }
     }
 }

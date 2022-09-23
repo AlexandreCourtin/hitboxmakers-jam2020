@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class AsteroidLogic : MonoBehaviour
 {
@@ -38,10 +38,10 @@ public class AsteroidLogic : MonoBehaviour
         transform.Rotate(0f, 0f, rotSpeed, Space.Self);
 
         // HIT VISUAL FEEDBACK - ASTEROID WILL LIGHT UP IF HIT
-        if (GetComponentInChildren<Light2D>().intensity > 2) {
-            GetComponentInChildren<Light2D>().intensity -= Time.fixedDeltaTime * 50f;
-        } else if (GetComponentInChildren<Light2D>().intensity < 2) {
-            GetComponentInChildren<Light2D>().intensity = 2;
+        if (GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().intensity > 2) {
+            GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().intensity -= Time.fixedDeltaTime * 50f;
+        } else if (GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().intensity < 2) {
+            GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().intensity = 2;
         }
 
         // DESTROY ASTEROID IF OUT OF SCREEN
@@ -82,7 +82,7 @@ public class AsteroidLogic : MonoBehaviour
             }
         } else { // NORMAL HIT
             GameObject.Find("Sounds").GetComponent<SoundMaker>().PlaySound(2);
-            GetComponentInChildren<Light2D>().intensity = 10;
+            GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().intensity = 10;
         }
     }
 }

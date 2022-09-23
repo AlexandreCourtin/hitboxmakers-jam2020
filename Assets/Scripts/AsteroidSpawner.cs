@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class AsteroidSpawner : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class AsteroidSpawner : MonoBehaviour
         float xScale = Random.Range(1f, 1f + gameTimer * .03f);
         obj.transform.localScale = new Vector3(xScale, 1f, 1f);
         obj.transform.Find("EarthSprite").transform.eulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
-        obj.GetComponentInChildren<Light2D>().pointLightOuterRadius = xScale * 1.5f;
+        obj.GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().pointLightOuterRadius = xScale * 1.5f;
 
         // RANDOM SPEED
         float speed = 1f + gameTimer * .05f;
